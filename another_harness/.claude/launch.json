@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "driveos-prototype",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "prototype", "run", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "driveos-manager",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "manager", "run", "dev"],
+      "port": 5175,
+      "autoPort": true
+    }
+  ]
+}

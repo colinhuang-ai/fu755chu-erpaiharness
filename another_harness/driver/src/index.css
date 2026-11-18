@@ -1,0 +1,169 @@
+/* =============================================================
+   index.css — CSS toàn cục + Design Tokens (lấy từ DESIGN.md)
+   Tailwind v4: khai báo token trong @theme thì sẽ tự sinh ra class.
+   Ví dụ:  --color-primary      → bg-primary, text-primary, ...
+           --text-title-2       → text-title-2 (kèm line-height, weight)
+           --spacing-space-md   → p-space-md, gap-space-md, ...
+   ============================================================= */
+@import 'tailwindcss';
+
+@theme {
+  /* ---------- Font chữ: hệ San Francisco của Apple, fallback về font hệ thống ---------- */
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+
+  /* ---------- Màu bề mặt (nền app, nền thẻ, các lớp nổi) ---------- */
+  --color-background: #faf9fe;
+  --color-surface: #faf9fe;
+  --color-surface-dim: #dad9df;
+  --color-surface-bright: #faf9fe;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f3f8;
+  --color-surface-container: #eeedf3;
+  --color-surface-container-high: #e9e7ed;
+  --color-surface-container-highest: #e3e2e7;
+  --color-surface-variant: #e3e2e7;
+  --color-on-surface: #1a1b1f;
+  --color-on-surface-variant: #414755;
+  --color-outline: #717786;
+  --color-outline-variant: #c1c6d7;
+  --color-inverse-surface: #2f3034; /* nền tối cho toast */
+  --color-inverse-on-surface: #f1f0f5;
+
+  /* ---------- Primary (xanh dương): hành động chính, trạng thái đang hoạt động ---------- */
+  --color-primary: #0058bc;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #0070eb;
+  --color-primary-fixed: #d8e2ff;
+  --color-on-primary-fixed: #001a41;
+
+  /* ---------- Secondary (xanh lá): an toàn, hợp lệ, hoàn tất ---------- */
+  --color-secondary: #006e28;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #6ffb85;
+  --color-on-secondary-container: #00732a;
+  --color-secondary-fixed: #72fe88;
+
+  /* ---------- Tertiary (cam): cảnh báo nhẹ, xăng RON95, thu nhập ---------- */
+  --color-tertiary: #894d00;
+  --color-tertiary-fixed: #ffdcbf;
+  --color-on-tertiary-fixed: #2d1600;
+  --color-on-tertiary-fixed-variant: #6a3b00;
+
+  /* ---------- Warning (cam iOS systemOrange): chấm "về sớm" trên lịch ---------- */
+  --color-warning: #ff9500;
+
+  /* ---------- Error (đỏ): khẩn cấp, SOS, hết hạn ---------- */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ---------- Thang chữ (typography scale) theo iOS HIG ---------- */
+  --text-large-title-mobile: 28px;
+  --text-large-title-mobile--line-height: 34px;
+  --text-large-title-mobile--letter-spacing: 0.34px;
+  --text-large-title-mobile--font-weight: 700;
+
+  --text-title-2: 22px;
+  --text-title-2--line-height: 28px;
+  --text-title-2--letter-spacing: -0.26px;
+  --text-title-2--font-weight: 600;
+
+  --text-title-3: 20px;
+  --text-title-3--line-height: 25px;
+  --text-title-3--letter-spacing: -0.45px;
+  --text-title-3--font-weight: 600;
+
+  --text-headline: 17px;
+  --text-headline--line-height: 22px;
+  --text-headline--letter-spacing: -0.43px;
+  --text-headline--font-weight: 600;
+
+  --text-body: 17px;
+  --text-body--line-height: 22px;
+  --text-body--letter-spacing: -0.43px;
+
+  --text-subheadline: 15px;
+  --text-subheadline--line-height: 20px;
+  --text-subheadline--letter-spacing: -0.23px;
+
+  --text-footnote: 13px;
+  --text-footnote--line-height: 18px;
+  --text-footnote--letter-spacing: -0.08px;
+
+  --text-caption-1: 12px;
+  --text-caption-1--line-height: 16px;
+  --text-caption-1--font-weight: 500;
+
+  --text-caption-2: 11px;
+  --text-caption-2--line-height: 13px;
+  --text-caption-2--letter-spacing: 0.06px;
+  --text-caption-2--font-weight: 600;
+
+  /* ---------- Khoảng cách (spacing) ---------- */
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.25rem;
+  --spacing-space-xl: 1.5rem;
+  --spacing-margin: 1rem;
+
+  /* ---------- Animation: modal trượt từ dưới lên (kiểu iOS bottom sheet) ---------- */
+  --animate-sheet-up: sheet-up 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-fade-in: fade-in 180ms ease-out;
+
+  @keyframes sheet-up {
+    from { transform: translateY(24px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
+/* =============================================================
+   Base layer: style mặc định cho html/body
+   ============================================================= */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-text);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none; /* tắt hiệu ứng kéo giãn trang trên mobile */
+  }
+
+  /* Số liệu dạng bảng: các chữ số rộng bằng nhau → đồng hồ/bộ đếm không bị "nhảy" chữ */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* =============================================================
+   Utility tự định nghĩa
+   ============================================================= */
+/* Khoảng đệm theo "vùng an toàn" của iPhone (tai thỏ trên, thanh home dưới) */
+@utility pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 14px);
+}
+@utility pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+
+/* Ẩn thanh cuộn cho cảm giác giống app native */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Icon Material Symbols: căn chỉnh để không bị lệch dòng */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  line-height: 1;
+  user-select: none;
+}
